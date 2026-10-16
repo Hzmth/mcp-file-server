@@ -76,7 +76,11 @@ function buildServer() {
 const app = express();
 app.use(express.json());
 
-app.post("/mcp", async (req, res) => {
+app.post("/mcp/:token", async (req, res) => {
+  if (!process.env.AUTH_TOKEN || req.params.token !== process.env.AUTH_TOKEN) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
   const server = buildServer();
   const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
   res.on("close", () => {
