@@ -4,3 +4,54 @@
 2026-10-16T12:26:45.886Z	search_files	. :: protocol	ok
 2026-10-16T12:26:59.724Z	delete_file	PROJECT_STATE.md	error: PROJECT_STATE.md is a handoff file and cannot be deleted. Edit it instead.
 2026-10-16T12:27:25.807Z	delete_file	test.txt	error: Deletion not confirmed. Call again with confirm=true if you are sure.
+2026-10-16T13:19:36.121Z	read_file	PROJECT_STATE.md	ok
+2026-10-16T13:19:38.686Z	read_file	PLAN_LOG.md	ok
+2026-10-16T13:19:40.277Z	read_file	CHECKPOINTS.md	ok
+2026-10-16T13:19:41.943Z	read_file	DECISIONS.md	ok
+2026-10-16T13:19:50.292Z	str_replace	PLAN_LOG.md	ok
+2026-10-16T13:20:03.221Z	write_file	site/data.js	ok
+2026-10-16T13:20:08.980Z	write_file	site/index.html	ok
+2026-10-16T13:20:29.657Z	write_file	site/styles.css	ok
+2026-10-16T13:20:42.807Z	write_file	site/app.js	ok
+2026-10-16T13:20:50.483Z	write_file	README.md	ok
+2026-10-16T13:20:54.444Z	str_replace	PLAN_LOG.md	ok
+2026-10-16T13:20:59.041Z	str_replace	PROJECT_STATE.md	ok
+2026-10-16T13:21:03.207Z	str_replace	CHECKPOINTS.md	ok
+2026-10-16T13:21:06.694Z	str_replace	DECISIONS.md	ok
+2026-10-16T13:21:09.100Z	git_commit	Roadmap demo half 1: plan, core site code, README, handoff updates	ok
+2026-10-16T13:32:14.843Z	read_file	PROJECT_STATE.md	ok
+2026-10-16T13:32:17.730Z	list_files	.	ok
+2026-10-16T13:32:19.140Z	read_file	PLAN_LOG.md	ok
+2026-10-16T13:32:21.544Z	search_files	. :: 2026	ok
+2026-10-16T13:32:23.180Z	read_file	site/data.js	ok
+2026-10-16T13:32:24.784Z	read_file	site/app.js	ok
+2026-10-16T13:32:26.869Z	read_file	site/index.html	ok
+2026-10-16T13:32:28.515Z	read_file	site/styles.css	ok
+2026-10-16T13:32:46.476Z	str_replace	PLAN_LOG.md	ok
+2026-10-16T13:32:51.535Z	str_replace	site/data.js	ok
+2026-10-16T13:32:54.306Z	str_replace	site/data.js	ok
+2026-10-16T13:32:57.130Z	str_replace	site/data.js	error: old_str matched 0 times; it must match exactly once.
+2026-10-16T13:32:58.665Z	search_files	site :: in-progress	ok
+2026-10-16T13:33:00.790Z	str_replace	site/data.js	ok
+2026-10-16T13:33:03.475Z	str_replace	site/data.js	ok
+2026-10-16T13:33:05.941Z	str_replace	site/data.js	ok
+2026-10-17T04:47:32.821Z	str_replace	site/data.js	ok
+2026-10-17T04:47:40.308Z	write_file	site/index.html	ok
+2026-10-17T04:48:02.103Z	write_file	site/styles.css	ok
+2026-10-17T04:48:04.980Z	str_replace	site/app.js	ok
+2026-10-17T04:48:10.991Z	str_replace	site/app.js	ok
+2026-10-17T04:48:15.386Z	str_replace	site/app.js	ok
+2026-10-17T04:48:18.087Z	str_replace	site/app.js	ok
+2026-10-17T04:48:21.591Z	search_files	. :: left	ok
+2026-10-17T04:48:23.037Z	read_file	README.md	ok
+2026-10-17T04:48:29.085Z	write_file	README.md	ok
+2026-10-17T04:48:31.740Z	str_replace	PLAN_LOG.md	ok
+2026-10-17T04:48:33.195Z	read_file	DECISIONS.md	ok
+2026-10-17T04:48:36.467Z	str_replace	DECISIONS.md	ok
+2026-10-17T04:48:37.942Z	search_files	. :: NEXT ENTRY	ok
+2026-10-17T04:48:40.188Z	str_replace	CHECKPOINTS.md	ok
+2026-10-17T04:48:44.918Z	write_file	PROJECT_STATE.md	ok
+2026-10-17T04:48:46.558Z	git_commit	Half 2: role grid landing view, dark theme, right-hand panel, extra milestone details	ok
+2026-10-17T05:00:22.568Z	write_file	transcript-session2.md	ok
+2026-10-17T05:02:36.368Z	list_files	/mnt/transcripts	error: Absolute paths are not allowed. Use a path relative to the workspace.
+2026-10-17T05:03:06.019Z	write_file	transcript-session1.md	ok
