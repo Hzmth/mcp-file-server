@@ -114,12 +114,14 @@ npm install
 `workspace/` is not stored in this repo (it is the agents' area, and it is git-ignored). Create it from the template and make it its own git repo, which the `git_*` tools use:
 
 **Linux**
+
 ```bash
 cp -r workspace-template workspace
 cd workspace && git init && cd ..
 ```
 
 **Windows**
+
 ```powershell
 Copy-Item -Recurse workspace-template workspace
 cd workspace; git init; cd ..
@@ -193,17 +195,21 @@ npx tsc && pm2 restart mcp-server
 ### Start automatically after a reboot
 
 **Linux**
+
 ```bash
 pm2 startup
 ```
+
 Copy the `sudo env PATH=...` line it prints, run it, then run `pm2 save` again.
 
 **Windows:** `pm2 startup` does not work on Windows. One option is the `pm2-windows-startup` package:
+
 ```powershell
 npm install -g pm2-windows-startup
 pm2-startup install
 pm2 save
 ```
+
 (This was not tested for this project. Windows Task Scheduler running `pm2 resurrect` at logon is an alternative.)
 
 ---
@@ -215,13 +221,16 @@ pm2 save
 3. In the dashboard, open **Domains**. Your free static domain is listed there. Copy it into `NGROK_DOMAIN` in `.env` (no `https://`).
 
 **Linux** (tarball install if you do not use the dashboard steps):
+
 ```bash
 cd ~/Downloads
 curl -sSLO https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
 sudo tar -xzf ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
 ngrok version
 ```
+
 Run the tunnel under pm2 using the included script:
+
 ```bash
 chmod +x tunnel.sh
 pm2 start ./tunnel.sh --name tunnel --interpreter bash
@@ -229,6 +238,7 @@ pm2 save
 ```
 
 **Windows:** install ngrok from the dashboard instructions (or `winget install ngrok.ngrok`), then run it in its own PowerShell window and leave it open:
+
 ```powershell
 ngrok http 3000 --url=your-domain.ngrok-free.dev
 ```
@@ -246,10 +256,13 @@ https://YOUR-DOMAIN/mcp/YOUR_SECRET
 **Wrong secret must be rejected (expect `401`):**
 
 Linux:
+
 ```bash
 curl -i -X POST https://YOUR-DOMAIN/mcp/wrong -H "Content-Type: application/json" -d '{}'
 ```
+
 Windows (use `curl.exe`, because plain `curl` is a PowerShell alias):
+
 ```powershell
 curl.exe -i -X POST https://YOUR-DOMAIN/mcp/wrong -H "Content-Type: application/json" -d "{}"
 ```
@@ -259,6 +272,7 @@ curl.exe -i -X POST https://YOUR-DOMAIN/mcp/wrong -H "Content-Type: application/
 ```bash
 npx @modelcontextprotocol/inspector
 ```
+
 In the browser, add a server using **Streamable HTTP** with the URL `http://127.0.0.1:3000/mcp/YOUR_SECRET`, connect, open **Tools**, and run `list_files`. Then try `read_file` with the path `../package.json`. It must be rejected.
 
 ---
@@ -268,6 +282,7 @@ In the browser, add a server using **Streamable HTTP** with the URL `http://127.
 **claude.ai:** Settings, then Connectors, then **Add custom connector**. Name it `my-file-server` and paste your connector URL. Start a new chat, switch the connector on, and ask Claude to list the files in your workspace. (Custom connectors depend on your plan.)
 
 **Claude Code:**
+
 ```bash
 claude mcp add --transport http my-file-server https://YOUR-DOMAIN/mcp/YOUR_SECRET
 ```
@@ -278,17 +293,17 @@ When you add new tools or restart the server, reconnect the connector so the cli
 
 ## Tools
 
-| Tool | What it does |
-|---|---|
-| `list_files` | List a directory. Folders end with `/`. |
-| `read_file` | Read a text file (max 100 KB). |
-| `write_file` | Create or overwrite a file (max 200,000 characters). |
-| `str_replace` | Replace one exact, unique occurrence of text in a file. |
-| `delete_file` | Delete one file. Needs `confirm=true`. Handoff files are protected. |
-| `search_files` | Case-insensitive text search, up to 20 `file:line: text` matches. |
-| `git_status` | Show changes in the workspace repo. |
-| `git_commit` | Stage everything and commit with a message. |
-| `git_log` | Show the last 10 commits. |
+| Tool           | What it does                                                        |
+| -------------- | ------------------------------------------------------------------- |
+| `list_files`   | List a directory. Folders end with `/`.                             |
+| `read_file`    | Read a text file (max 100 KB).                                      |
+| `write_file`   | Create or overwrite a file (max 200,000 characters).                |
+| `str_replace`  | Replace one exact, unique occurrence of text in a file.             |
+| `delete_file`  | Delete one file. Needs `confirm=true`. Handoff files are protected. |
+| `search_files` | Case-insensitive text search, up to 20 `file:line: text` matches.   |
+| `git_status`   | Show changes in the workspace repo.                                 |
+| `git_commit`   | Stage everything and commit with a message.                         |
+| `git_log`      | Show the last 10 commits.                                           |
 
 Failures come back as `isError` results with a readable message, never a stack trace.
 
@@ -330,16 +345,24 @@ mcp-file-server/
 
 ## Troubleshooting
 
-| Problem | Fix |
-|---|---|
-| `401 Unauthorized` from the real URL | The secret in the URL does not match `AUTH_TOKEN` in `.env`. Restart after editing `.env`. |
-| `404` on `/mcp/...` | You are running old code. Run `npx tsc && pm2 restart mcp-server`. |
-| Connector shows old tools | Disconnect and reconnect it, or remove and re-add it. |
-| `EADDRINUSE` | Something already uses port 3000. Run `pm2 ls` and stop the old process. |
-| Tunnel shows "endpoint already online" | Only one ngrok session can use the free domain. Stop the other one. |
+| Problem                                   | Fix                                                                                              |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `401 Unauthorized` from the real URL      | The secret in the URL does not match `AUTH_TOKEN` in `.env`. Restart after editing `.env`.       |
+| `404` on `/mcp/...`                       | You are running old code. Run `npx tsc && pm2 restart mcp-server`.                               |
+| Connector shows old tools                 | Disconnect and reconnect it, or remove and re-add it.                                            |
+| `EADDRINUSE`                              | Something already uses port 3000. Run `pm2 ls` and stop the old process.                         |
+| Tunnel shows "endpoint already online"    | Only one ngrok session can use the free domain. Stop the other one.                              |
 | pm2 process is "online" but nothing works | Check `pm2 logs mcp-server` and `pm2 logs tunnel`. Old errors stay in the log until `pm2 flush`. |
-| `git_commit` fails | Run `git init` inside `workspace/` and set `git config --global user.name` and `user.email`. |
+| `git_commit` fails                        | Run `git init` inside `workspace/` and set `git config --global user.name` and `user.email`.     |
 
 ## Course evidence
 
 The `evidence/` folder holds the two-session transcripts, the final `PLAN_LOG`, `CHECKPOINTS` and `DECISIONS` files, and the tool call log from the demo task.
+
+### Result of the demo task
+
+The agents built this website across two separate sessions, using only the handoff files to continue.
+
+![Website landing view](evidence/screenshots/website-1-landing.png)
+
+![Website detail view](evidence/screenshots/website-2-detail.png)

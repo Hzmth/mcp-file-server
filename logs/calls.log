@@ -55,3 +55,6 @@
 2026-10-17T05:00:22.568Z	write_file	transcript-session2.md	ok
 2026-10-17T05:02:36.368Z	list_files	/mnt/transcripts	error: Absolute paths are not allowed. Use a path relative to the workspace.
 2026-10-17T05:03:06.019Z	write_file	transcript-session1.md	ok
+2026-10-17T06:02:29.653Z	read_file	../package.json	error: Path escapes the workspace and was rejected.
+2026-10-17T06:03:59.074Z	read_file	../package.json	error: Path escapes the workspace and was rejected.
+2026-10-17T06:04:23.198Z	read_file	/etc/passwd	error: Absolute paths are not allowed. Use a path relative to the workspace.
