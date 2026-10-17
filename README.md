@@ -102,7 +102,7 @@ The `git_commit` tool uses this identity.
 ## 2. Get the code
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/mcp-file-server.git
+git clone https://github.com/Hzmth/mcp-file-server.git
 cd mcp-file-server
 npm install
 ```
